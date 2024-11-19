@@ -16,6 +16,5 @@ export default function OffCanvasSideBar(id: string, contentBody: ReactNode) {
                 {contentBody}
             </div>
         </div>
-
     )
 }

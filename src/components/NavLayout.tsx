@@ -17,10 +17,10 @@ const NavLayout: React.FC<LayoutWithNav> = () => {
             <TopNavBar/>
             <div className={"container-xxl bd-gutter my-md-3 mt-3 bd-layout"}>
                 <div className={"row"}>
-                    <div className="col">
+                    <div className="col-2 col-sm-1">
                         <SideNav/>
                     </div>
-                    <div className="col-md-9">
+                    <div className="col">
                         <main className="bd-main order-1">
                             <Outlet/>
                         </main>

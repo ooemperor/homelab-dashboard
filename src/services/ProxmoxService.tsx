@@ -1,3 +1,4 @@
+'use client';
 /**
  * Service Class for defining how to interact with a proxmox API
  * For more information about the proxmox api see:
@@ -24,10 +25,10 @@ class ProxmoxService {
      * Get method to get all Nodes of proxmox cluster
      */
     async getNodes(): Promise<NodesResponse> {
-        let nodeResponse: any = {success: false, nodes: false, message: ''};
+        let nodeResponse: any = {success: false, nodes: [], message: ''};
 
         try {
-            const response: Response = await fetch(`${this.baseUrl}/api2/json/nodes}`, {
+            const response: Response = await fetch(`${this.baseUrl}/api2/json/nodes`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json', 'Authorization': this.apiToken},
             });
