@@ -1,0 +1,8 @@
+services:
+  client:
+    build: .
+    container_name: HomelabDashboard
+    ports:
+      - "8080:8080"
+    env_file:
+      - ".env"
