@@ -26,7 +26,7 @@ class ProxmoxService {
      * Get method to get all Nodes of proxmox cluster
      */
     async getNodes(): Promise<NodesResponse> {
-        let nodeResponse: any = {success: false, nodes: [], message: ''};
+        let nodeResponse: NodesResponse = {success: false, nodes: [], message: ''};
 
         try {
             const response: Response = await fetch(`${this.baseUrl}/api2/json/nodes`, {
@@ -45,6 +45,35 @@ class ProxmoxService {
             nodeResponse.message = error;
         }
         return nodeResponse;
+    }
+
+    /**
+     * Gets all the ressources from the cluster
+     * Will later be used to split it up more.
+     * @param type the type of ressource we want to filter for
+     */
+    async getResources(type: string | null = null): Promise<any> {
+        let resourceResponse: any = {success: false, nodes: [], message: ''};
+
+        try {
+            const response: Response = await fetch(`${this.baseUrl}/api2/json/cluster/resources`, {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json', 'Authorization': this.apiToken || ""},
+            });
+
+            if (!response.ok) {
+                resourceResponse.message = response.statusText;
+                return resourceResponse;
+            }
+            const raw_json = await response.json();
+            let process_json = await raw_json['data'];
+            let process_json = process_json.filter(resource: any => resource.type.equal(type))
+            resourceResponse.nodes = await raw_json['data'];
+            resourceResponse.success = true;
+        } catch (error: any) {
+            resourceResponse.message = error;
+        }
+        return resourceResponse;
     }
 }
 

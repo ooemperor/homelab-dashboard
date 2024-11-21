@@ -32,3 +32,21 @@ export interface LXC {
     template: boolean | null,
     uptime: number | null
 }
+
+/**
+ * Response type for multiple nodes
+ */
+export interface LXCsResponse {
+    lxcs: LXC[];
+    success: boolean;
+    message: string;
+}
+
+/**
+ * Response type for single node
+ */
+export interface LXCResponse {
+    lxc: LXC;
+    success: boolean;
+    message: string;
+}
