@@ -7,6 +7,8 @@
  */
 import {NodesResponse} from "../models/proxmox/Node";
 import {config} from "../Config";
+import {LXCResponse, LXCsResponse, MachinesResponse, VMsResponse} from "../models/proxmox/Machines";
+import * as VM from "node:vm";
 
 class ProxmoxService {
     apiToken: string | undefined;
@@ -53,7 +55,7 @@ class ProxmoxService {
      * @param type the type of ressource we want to filter for
      */
     async getResources(type: string | null = null): Promise<any> {
-        let resourceResponse: any = {success: false, nodes: [], message: ''};
+        let resourceResponse: any = {success: false, resources: [], message: ''};
 
         try {
             const response: Response = await fetch(`${this.baseUrl}/api2/json/cluster/resources`, {
@@ -67,13 +69,41 @@ class ProxmoxService {
             }
             const raw_json = await response.json();
             let process_json = await raw_json['data'];
-            process_json = process_json.filter((resource: any) => resource.type.equal(type))
-            resourceResponse.nodes = await raw_json['data'];
+            if (type !== null){
+                process_json = await process_json.filter((resource: any) => resource.type === type)
+
+            }
+
+            resourceResponse.resources = await process_json;
             resourceResponse.success = true;
         } catch (error: any) {
             resourceResponse.message = error;
         }
         return resourceResponse;
+    }
+
+    /**
+     * Method to get all the LXCs
+     */
+    async getLXCs(): Promise<LXCsResponse> {
+        let lxcsResponse: LXCsResponse = {success: false, lxcs: [], message: ''};
+        const resourceResponse: any =  await this.getResources('lxc');
+        lxcsResponse.success = resourceResponse.success;
+        lxcsResponse.message = resourceResponse.message;
+        lxcsResponse.lxcs = resourceResponse.resources;
+        return lxcsResponse;
+    }
+
+    /**
+     * Method to get all the VMs
+     */
+    async getVMs(): Promise<VMsResponse> {
+        let vmsResponse: VMsResponse = {success: false, vms: [], message: ''};
+        const resourceResponse: any =  await this.getResources('qemu');
+        vmsResponse.success = resourceResponse.success;
+        vmsResponse.message = resourceResponse.message;
+        vmsResponse.vms = resourceResponse.resources;
+        return vmsResponse;
     }
 }
 

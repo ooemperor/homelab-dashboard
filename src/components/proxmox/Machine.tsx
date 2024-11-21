@@ -2,7 +2,7 @@
  * File to define components for using with LXC
  */
 import React from "react";
-import {LXCStatus} from "../../models/proxmox/LXC";
+import {MachineStatus} from "../../models/proxmox/Machines";
 
 
 /**
@@ -10,8 +10,8 @@ import {LXCStatus} from "../../models/proxmox/LXC";
  * @param status
  * @constructor
  */
-export default function LXCStatusBadge(status: LXCStatus) {
-    if (status === LXCStatus.running) {
+export default function MachineStatusBadge(status: MachineStatus) {
+    if (status === MachineStatus.running) {
         return <span className="badge text-bg-success">{status}</span>
     } else {
         return <span className="badge text-bg-danger">{status}</span>
