@@ -67,7 +67,7 @@ class ProxmoxService {
             }
             const raw_json = await response.json();
             let process_json = await raw_json['data'];
-            let process_json = process_json.filter(resource: any => resource.type.equal(type))
+            process_json = process_json.filter((resource: any) => resource.type.equal(type))
             resourceResponse.nodes = await raw_json['data'];
             resourceResponse.success = true;
         } catch (error: any) {
