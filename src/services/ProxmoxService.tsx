@@ -6,6 +6,7 @@
  * @author ooemperor
  */
 import {NodesResponse} from "../models/proxmox/Node";
+import {config} from "../Config";
 
 class ProxmoxService {
     apiToken: string;
@@ -30,7 +31,7 @@ class ProxmoxService {
         try {
             const response: Response = await fetch(`${this.baseUrl}/api2/json/nodes`, {
                 method: 'GET',
-                headers: {'Content-Type': 'application/json', 'Authorization': this.apiToken},
+                headers: {'Content-Type': 'application/json', 'Authorization': this.apiToken || ""},
             });
 
             if (!response.ok) {
@@ -47,4 +48,4 @@ class ProxmoxService {
     }
 }
 
-export const proxmoxService = new ProxmoxService("", ""); //TODO: Change to correct config params
+export const proxmoxService = new ProxmoxService(config.proxmoxApiKey, config.proxmoxApi);
