@@ -3,22 +3,21 @@
  * Reads the config out of the .env file
  * @author ooemperor
  */
-import configData from "./config.sec.json"
 
 /**
  * Class for the config object used in total
  */
 export class Config{
-    proxmoxApi: string;
-    proxmoxApiKey: string;
+    proxmoxApi: string | undefined;
+    proxmoxApiKey: string | undefined;
 
     /**
      * Constructor of the config
      */
     constructor() {
 
-        this.proxmoxApi = configData.proxmox.api;
-        this.proxmoxApiKey = configData.proxmox.apiKey;
+        this.proxmoxApi = process.env.REACT_APP_PROXMOX_API;
+        this.proxmoxApiKey = process.env.REACT_APP_PROXMOX_API_KEY;
     }
 }
 

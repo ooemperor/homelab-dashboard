@@ -9,15 +9,15 @@ import {NodesResponse} from "../models/proxmox/Node";
 import {config} from "../Config";
 
 class ProxmoxService {
-    apiToken: string;
-    baseUrl: string;
+    apiToken: string | undefined;
+    baseUrl: string | undefined;
 
     /**
      * Constructor of ProxmoxService
      * @param apiToken the token for authentication
      * @param baseUrl the base url for the proxmox server
      */
-    constructor(apiToken: string, baseUrl: string) {
+    constructor(apiToken: string | undefined, baseUrl: string | undefined) {
         this.apiToken = apiToken;
         this.baseUrl = baseUrl;
     }
@@ -39,7 +39,7 @@ class ProxmoxService {
                 return nodeResponse;
             }
             const raw_json = await response.json();
-            nodeResponse.isRiding = await raw_json['data'];
+            nodeResponse.nodes = await raw_json['data'];
             nodeResponse.success = true;
         } catch (error: any) {
             nodeResponse.message = error;

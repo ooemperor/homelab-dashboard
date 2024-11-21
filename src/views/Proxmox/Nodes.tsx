@@ -21,7 +21,6 @@ export default function Nodes() {
             const nodesData = await getNodes();
             setNodes(nodesData.nodes);
         }
-
         loadNodes();
 
     }, []);
