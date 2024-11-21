@@ -5,6 +5,7 @@
 import React, {useEffect, useState} from "react";
 import {useNodes} from "../../hooks/useNodes";
 import {Node} from "../../models/proxmox/Node";
+import NodeStatusBadge from "../../components/proxmox/Node";
 
 /**
  * Render the main content of the Nodes page
@@ -46,7 +47,7 @@ export default function Nodes() {
                         {!isLoading && nodes.map((node) => (
                             <tr className="clickable-row" key={node.node}>
                                 <td>{node.node}</td>
-                                <td>{node.status}</td>
+                                <td>{NodeStatusBadge(node.status)}</td>
                             </tr>
                         ))}
                         </tbody>

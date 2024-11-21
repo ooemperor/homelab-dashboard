@@ -6,9 +6,9 @@
  * enum of status of proxmox node
  */
 export enum NodeStatus {
-    unknown,
-    online,
-    offline
+    unknown = "unknown",
+    online = "online",
+    offline = "offline"
 }
 
 /**
