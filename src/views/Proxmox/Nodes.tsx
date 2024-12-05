@@ -43,7 +43,8 @@ export default function Nodes() {
                         </tr>
                         </thead>
                         <tbody>
-
+                        {isLoading ? <p>Loading...</p> : null}
+                        {errorMessage.error ? <p>{errorMessage.message}</p> : null}
                         {!isLoading && nodes.map((node) => (
                             <tr className="clickable-row" key={node.node}>
                                 <td>{node.node}</td>

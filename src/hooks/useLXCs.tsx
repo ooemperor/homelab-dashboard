@@ -22,7 +22,7 @@ export const useLXCs = () => {
 
         const lxcsResponse: LXCsResponse = await proxmoxService.getLXCs();
         if (!lxcsResponse.success) {
-            setErrorMessageProps({error: false, message: lxcsResponse.message});
+            setErrorMessageProps({error: true, message: lxcsResponse.message});
         }
         setIsLoading(false);
         return lxcsResponse;

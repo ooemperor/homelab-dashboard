@@ -6,6 +6,8 @@ import React, {useEffect, useState} from "react";
 import {useLXCs} from "../../hooks/useLXCs";
 import {LXC, MachineStatus} from "../../models/proxmox/Machines";
 import MachineStatusBadge from "../../components/proxmox/Machine";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 export default function LXCs() {
 
@@ -41,6 +43,8 @@ export default function LXCs() {
                         </thead>
                         <tbody>
 
+                        {isLoading ? <p>Loading...</p> : null}
+                        {errorMessage.error ? <p>{errorMessage.message}</p> : null}
                         {!isLoading && lxcs.map((lxc) => (
                             <tr className="clickable-row" key={lxc.name}>
                                 <td>{lxc.name}</td>

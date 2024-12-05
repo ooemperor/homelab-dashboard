@@ -22,7 +22,7 @@ export const useVMs = () => {
 
         const vmResponse: VMsResponse = await proxmoxService.getVMs();
         if (!vmResponse.success) {
-            setErrorMessageProps({error: false, message: vmResponse.message});
+            setErrorMessageProps({error: true, message: vmResponse.message});
         }
         setIsLoading(false);
         return vmResponse;

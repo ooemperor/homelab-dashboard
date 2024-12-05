@@ -3,7 +3,7 @@
  * @author ooemperor
  */
 import React, {useEffect, useState} from "react";
-import {LXC, VM} from "../../models/proxmox/Machines";
+import {VM} from "../../models/proxmox/Machines";
 import {useVMs} from "../../hooks/useVMs";
 import MachineStatusBadge from "../../components/proxmox/Machine";
 
@@ -39,7 +39,8 @@ export default function VMs() {
                         </tr>
                         </thead>
                         <tbody>
-
+                        {isLoading ? <p>Loading...</p> : null}
+                        {errorMessage.error ? <p>{errorMessage.message}</p> : null}
                         {!isLoading && vms.map((vm) => (
                             <tr className="clickable-row" key={vm.name}>
                                 <td>{vm.name}</td>

@@ -22,7 +22,7 @@ export const useNodes = () => {
 
         const nodesResponse: NodesResponse = await proxmoxService.getNodes();
         if (!nodesResponse.success) {
-            setErrorMessageProps({error: false, message: nodesResponse.message});
+            setErrorMessageProps({error: true, message: nodesResponse.message});
         }
         setIsLoading(false);
         return nodesResponse;
