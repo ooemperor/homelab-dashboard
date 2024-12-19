@@ -4,6 +4,10 @@ on:
     branches:
       - "documentation"
 
+  deployment:
+    branches:
+      - "documentation"
+
 jobs:
   publish-documentation:
     name: Publish documentation
