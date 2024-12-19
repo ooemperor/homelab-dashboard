@@ -1,0 +1,40 @@
+name: "Build and push documentation"
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy:
+    name: Deploy Documentation
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: TSDoc Action
+        uses: erikyo/tsdoc-action@v1
+        with:
+          source_dir: ./src/*
+          output_dir: ./docs
+          skipErrorChecking: true
+          options: typedoc.json
+
+      - name: deploy pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: 'documentation'
+          destination_dir: './docs'
+          publish_dir: './docs'

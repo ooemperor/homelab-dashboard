@@ -1,32 +1,31 @@
 /**
- * useNodes
+ * useLXCs
  * @author: ooemperor
  */
 import {useState} from "react";
 import {ErrorMessage} from "../models/ErrorMessage";
-import {NodesResponse} from "../models/proxmox/Node";
 import {proxmoxService} from "../services/ProxmoxService";
+import {LXCsResponse} from "../models/proxmox/Machines";
 
 /**
- * useNodes for Proxmox
+ * useLXCs for Proxmox
  * Method used in loading the data in the Route
  * Helper method for later use in useEffect for loading data from the thingy
  */
-export const useNodes = () => {
+export const useLXCs = () => {
     const [errorMessage, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
     const [isLoading, setIsLoading] = useState<Boolean>(false);
 
-    const getNodes = async () => {
+    const getLXCs = async () => {
         setIsLoading(true);
         setErrorMessageProps({error: false, message:''});
 
-        const nodesResponse: NodesResponse = await proxmoxService.getNodes();
-        if (!nodesResponse.success) {
-            setErrorMessageProps({error: true, message: nodesResponse.message});
+        const lxcsResponse: LXCsResponse = await proxmoxService.getLXCs();
+        if (!lxcsResponse.success) {
+            setErrorMessageProps({error: true, message: lxcsResponse.message});
         }
         setIsLoading(false);
-        return nodesResponse;
+        return lxcsResponse;
     }
-
-    return {getNodes, isLoading, errorMessage};
+    return {getLXCs, isLoading, errorMessage};
 }
