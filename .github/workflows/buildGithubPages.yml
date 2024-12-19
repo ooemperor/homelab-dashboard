@@ -38,3 +38,4 @@ jobs:
           publish_branch: 'documentation'
           destination_dir: '.'
           publish_dir: '.'
+          exclude_assets: ''
