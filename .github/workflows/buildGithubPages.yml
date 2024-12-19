@@ -1,4 +1,4 @@
-name: "Build and push documentation on main"
+name: "Build, Push and Deploy documentation"
 on:
   push:
     branches:
@@ -39,3 +39,28 @@ jobs:
           destination_dir: './docs'
           publish_dir: './docs'
           exclude_assets: ''
+
+  publish-documentation:
+    name: Publish documentation
+    permissions:
+      id-token: "write"
+      pages: "write"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - id: "checkout"
+        name: "Check out Git repository"
+        uses: "actions/checkout@v3"
+        with:
+          ref: "documentation"
+
+      - id: "upload-documentation"
+        name: "Upload Pages artifact"
+        uses: "actions/upload-pages-artifact@v2"
+        with:
+          path: "docs/"
+
+      - id: "deployment"
+        name: "Deploy documentation to GitHub Pages"
+        uses: "actions/deploy-pages@v2"
