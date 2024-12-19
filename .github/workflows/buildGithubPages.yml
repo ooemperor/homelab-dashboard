@@ -5,8 +5,8 @@ on:
       - "main"
 
 jobs:
-  deploy:
-    name: Deploy Documentation
+  build-push:
+    name: Build and Push doc to documentation branch
 
     environment:
       name: github-pages
@@ -41,7 +41,8 @@ jobs:
           exclude_assets: ''
 
   publish-documentation:
-    name: Publish documentation
+    needs: build-push
+    name: Publish documentation to github pages
     permissions:
       id-token: "write"
       pages: "write"
