@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+## Project Code Documentation
+For proper documentation please see: [Documentation](https://ooemperor.github.io/homelab-dashboard/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
