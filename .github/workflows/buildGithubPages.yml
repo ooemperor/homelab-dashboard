@@ -1,8 +1,8 @@
-name: "Publish documentation"
+name: "Build and push documentation"
 on:
   push:
     branches:
-      - "development"
+      - "main"
 
 jobs:
   deploy:
