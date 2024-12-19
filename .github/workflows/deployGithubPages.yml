@@ -1,8 +1,10 @@
 name: "Publish documentation"
 on:
-  page_build:
-    branches:
-      - "documentation"
+  workflow_run:
+    workflows:
+      - "Build and push documentation on main"  # The name of the workflow that pushes to the `docs` branch
+    types:
+      - completed
 
 jobs:
   publish-documentation:

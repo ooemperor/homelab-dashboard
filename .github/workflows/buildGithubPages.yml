@@ -1,4 +1,4 @@
-name: "Build and push documentation"
+name: "Build and push documentation on main"
 on:
   push:
     branches:
