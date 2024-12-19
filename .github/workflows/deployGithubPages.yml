@@ -2,7 +2,7 @@ name: "Publish documentation"
 on:
   workflow_run:
     workflows:
-      - "Build and push documentation on main"  # The name of the workflow that pushes to the `docs` branch
+      - "Build and push documentation on main"
     types:
       - completed
 
@@ -19,6 +19,8 @@ jobs:
       - id: "checkout"
         name: "Check out Git repository"
         uses: "actions/checkout@v4"
+        with:
+          ref: "documentation"
 
       - id: "upload-documentation"
         name: "Upload Pages artifact"
