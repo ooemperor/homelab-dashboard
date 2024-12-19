@@ -8,10 +8,6 @@ jobs:
   build-push:
     name: Build and Push doc to documentation branch
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -43,6 +39,11 @@ jobs:
   publish-documentation:
     needs: build-push
     name: Publish documentation to github pages
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     permissions:
       id-token: "write"
       pages: "write"
@@ -58,10 +59,10 @@ jobs:
 
       - id: "upload-documentation"
         name: "Upload Pages artifact"
-        uses: "actions/upload-pages-artifact@v2"
+        uses: "actions/upload-pages-artifact@v3"
         with:
           path: "docs/"
 
       - id: "deployment"
         name: "Deploy documentation to GitHub Pages"
-        uses: "actions/deploy-pages@v2"
+        uses: "actions/deploy-pages@v4"
