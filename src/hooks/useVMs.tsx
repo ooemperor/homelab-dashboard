@@ -1,16 +1,38 @@
 /**
- * useVMs
+ * useVMs / useVM
+ * File for hooks around VMs
  * @author: ooemperor
  */
 import {useState} from "react";
 import {ErrorMessage} from "../models/ErrorMessage";
 import {proxmoxService} from "../services/ProxmoxService";
-import {LXCsResponse, VMsResponse} from "../models/proxmox/Machines";
+import {LXCsResponse, VMResponse, VMsResponse} from "../models/proxmox/Machines";
 
 /**
  * useVMs for Proxmox
  * Method used in loading the data in the Route
- * Helper method for later use in useEffect for loading data from the thingy
+ */
+export const useVM = (name: string) => {
+    const [errorMessage, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
+    const [isLoading, setIsLoading] = useState<Boolean>(false);
+
+    const getVM = async () => {
+        setIsLoading(true);
+        setErrorMessageProps({error: false, message:''});
+
+        const vmResponse: VMResponse = await proxmoxService.getVM(name);
+        if (!vmResponse.success) {
+            setErrorMessageProps({error: true, message: vmResponse.message});
+        }
+        setIsLoading(false);
+        return vmResponse;
+    }
+    return {getVM, isLoading, errorMessage};
+}
+
+/**
+ * useVMs for Proxmox
+ * Method used in loading the data in the Route
  */
 export const useVMs = () => {
     const [errorMessage, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});

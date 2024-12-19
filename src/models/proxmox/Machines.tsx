@@ -18,18 +18,19 @@ export interface Machine {
     node: string | null,
     vmid: number,
     status: MachineStatus,
-    cpus: number | null,
+    cpu: number | null,
+    maxcpu: number,
     diskread: number | null,
     diskwrite: number | null,
     lock: string | null,
     maxdisk: number | null,
-    maxmem: number | null,
+    maxmem: number,
     name: string | null,
     netin: number | null,
     netout: number | null,
     tags: string | null,
     template: boolean | null,
-    uptime: number | null
+    uptime: number
 }
 
 /**
@@ -63,16 +64,7 @@ export interface LXCsResponse {
  * Response type for single LXC
  */
 export interface LXCResponse {
-    lxc: LXC;
-    success: boolean;
-    message: string;
-}
-
-/**
- * Response type for multiple VMs
- */
-export interface MachinesResponse {
-    lxcs: Machine[];
+    lxc: LXC | null;
     success: boolean;
     message: string;
 }
@@ -90,7 +82,7 @@ export interface VMsResponse {
  * Response type for single VM
  */
 export interface VMResponse {
-    vm: VM;
+    vm: VM | null;
     success: boolean;
     message: string;
 }

@@ -19,8 +19,8 @@ export interface Node {
     status: NodeStatus,
     cpu: number | null,
     level: string | null,
-    maxcpu: number | null,
-    maxmem: number | null,
+    maxcpu: number,
+    maxmem: number,
     mem: number | null,
     uptime: number | null
 }
@@ -38,7 +38,7 @@ export interface NodesResponse {
  * Response type for single node
  */
 export interface NodeResponse {
-    nodes: Node;
+    node: Node | null;
     success: boolean;
     message: string;
 }
