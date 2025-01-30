@@ -6,6 +6,7 @@ import TopNavBar from "./TopNavBar";
 import SideNav from "./SideNav";
 import {Outlet} from "react-router-dom";
 import React, {ReactNode} from "react";
+import {ToastContainer} from "./Toast";
 
 interface LayoutWithNav {
     children: ReactNode;
