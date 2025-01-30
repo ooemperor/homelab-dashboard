@@ -35,8 +35,8 @@ export const useVM = (name: string) => {
  * Method used in loading the data in the Route
  */
 export const useVMs = () => {
-    const [errorMessage, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
-    const [isLoading, setIsLoading] = useState<Boolean>(false);
+    const [errorMessage_vms, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
+    const [isLoading_vms, setIsLoading] = useState<Boolean>(false);
 
     const getVMs = async () => {
         setIsLoading(true);
@@ -49,5 +49,5 @@ export const useVMs = () => {
         setIsLoading(false);
         return vmResponse;
     }
-    return {getVMs, isLoading, errorMessage};
+    return {getVMs, isLoading_vms, errorMessage_vms};
 }

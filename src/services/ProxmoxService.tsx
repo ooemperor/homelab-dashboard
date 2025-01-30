@@ -68,6 +68,7 @@ class ProxmoxService {
                 return nodeResponse;
             }
             const raw_json = await response.json();
+            console.log(raw_json);
             nodeResponse.node = await raw_json['data'][0];
             nodeResponse.success = true;
         } catch (error: any) {

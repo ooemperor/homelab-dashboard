@@ -12,7 +12,7 @@ import {useNavigate} from "react-router-dom";
 
 export default function LXCs() {
 
-    const {getLXCs, errorMessage, isLoading} = useLXCs();
+    const {getLXCs, errorMessage_lxcs, isLoading_lxcs} = useLXCs();
 
     const [lxcs, setLXCs] = useState<LXC[]>([]);
     const navigate = useNavigate();
@@ -43,10 +43,9 @@ export default function LXCs() {
                         </tr>
                         </thead>
                         <tbody>
-
-                        {isLoading ? <p>Loading...</p> : null}
-                        {errorMessage.error ? <p>{errorMessage.message}</p> : null}
-                        {!isLoading && lxcs.map((lxc) => (
+                        {isLoading_lxcs ? <p>Loading...</p> : null}
+                        {errorMessage_lxcs.error ? <p>{errorMessage_lxcs.message}</p> : null}
+                        {!isLoading_lxcs && lxcs.sort((a, b) => a.name > b.name ? 1 : -1).map((lxc) => (
                             <tr className="clickable-row" key={lxc.name} onClick={ () => {navigate(`/proxmox/lxc/${lxc.name}`)}}>
                                 <td>{lxc.name}</td>
                                 <td>{lxc.node}</td>

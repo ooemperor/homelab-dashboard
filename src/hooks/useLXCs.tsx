@@ -36,8 +36,8 @@ export const useLXC = (name: string) => {
  * Method used in loading the data in the Route
  */
 export const useLXCs = () => {
-    const [errorMessage, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
-    const [isLoading, setIsLoading] = useState<Boolean>(false);
+    const [errorMessage_lxcs, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
+    const [isLoading_lxcs, setIsLoading] = useState<Boolean>(false);
 
     const getLXCs = async () => {
         setIsLoading(true);
@@ -50,5 +50,5 @@ export const useLXCs = () => {
         setIsLoading(false);
         return lxcsResponse;
     }
-    return {getLXCs, isLoading, errorMessage};
+    return {getLXCs, isLoading_lxcs, errorMessage_lxcs};
 }

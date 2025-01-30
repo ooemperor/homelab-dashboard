@@ -5,7 +5,7 @@
 
 export default function TopNavBar() {
     return (
-        <header className="navbar navbar-expand-lg bd-navbar sticky-top bg-primary">
+        <header className="navbar navbar-expand-lg bd-navbar sticky-top bg-secondary text-white">
             <nav
                 className="container-xxl bd-gutter flex-wrap flex-lg-nowrap">
                 <div className="bd-navbar-toggle">

@@ -46,7 +46,7 @@ export default function Nodes() {
                         <tbody>
                         {isLoading ? <p>Loading...</p> : null}
                         {errorMessage.error ? <p>{errorMessage.message}</p> : null}
-                        {!isLoading && nodes.map((node) => (
+                        {!isLoading && nodes.sort((a, b) => a.node > b.node ? 1 : -1).map((node) => (
                             <tr className="clickable-row" key={node.node} onClick={ () => {navigate(`/proxmox/nodes/${node.node}`)}}>
                                 <td>{node.node}</td>
                                 <td>{NodeStatusBadge(node.status)}</td>

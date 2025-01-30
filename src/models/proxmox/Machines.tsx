@@ -25,7 +25,7 @@ export interface Machine {
     lock: string | null,
     maxdisk: number | null,
     maxmem: number,
-    name: string | null,
+    name: string,
     netin: number | null,
     netout: number | null,
     tags: string | null,
