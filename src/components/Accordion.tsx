@@ -20,7 +20,7 @@ export default function Accordion(id: string, header: string, body: ReactNode): 
         <div className="accordion" id={id}>
             <div className="accordion-item">
                 <h2 className="accordion-header">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse"
+                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target={id_ref + "One"} aria-expanded="true" aria-controls="collapseOne">
                         {header}
                     </button>

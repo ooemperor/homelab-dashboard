@@ -8,7 +8,7 @@
 import {NodeResponse, NodesResponse} from "../models/proxmox/Node";
 import {config} from "../Config";
 import {LXCResponse, LXCsResponse, VMResponse, VMsResponse} from "../models/proxmox/Machines";
-import * as VM from "node:vm";
+import {StatusResponse} from "../models/proxmox/Status";
 
 class ProxmoxService {
     apiToken: string | undefined;
@@ -22,6 +22,31 @@ class ProxmoxService {
     constructor(apiToken: string | undefined, baseUrl: string | undefined) {
         this.apiToken = apiToken;
         this.baseUrl = baseUrl;
+    }
+
+    /**
+     * Fetch the status of the cluster from proxmox
+     */
+    async getStatus(): Promise<StatusResponse> {
+        let statusResponse: StatusResponse = {success: false, status: null, message: ''};
+
+        try {
+            const response: Response = await fetch(`${this.baseUrl}/api2/json/cluster/status`, {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json', 'Authorization': this.apiToken || ""},
+            });
+
+            if (!response.ok) {
+                statusResponse.message = response.statusText;
+                return statusResponse;
+            }
+            const raw_json = await response.json();
+            statusResponse.status = await raw_json['data'];
+            statusResponse.success = true;
+        } catch (error: any) {
+            statusResponse.message = error;
+        }
+        return statusResponse;
     }
 
     /**

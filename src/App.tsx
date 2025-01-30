@@ -11,12 +11,14 @@ import NavLayout from "./components/NavLayout";
 import Nodes from "./views/Proxmox/Node/Nodes";
 import VMs from "./views/Proxmox/VM/VMs";
 import LXCs from "./views/Proxmox/LXC/LXCs";
-import Node from "./views/Proxmox/Node/Node";
 import Node_View from "./views/Proxmox/Node/Node";
 import LXC_View from "./views/Proxmox/LXC/LXC";
 import VM_View from "./views/Proxmox/VM/VM";
 import ProxmoxHome from "./views/Proxmox/ProxmoxHome";
 
+/**
+ * Main App run function
+ */
 function App() {
     return (
         <BrowserRouter>
