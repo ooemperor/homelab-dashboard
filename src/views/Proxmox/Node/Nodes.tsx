@@ -3,9 +3,10 @@
  * @author ooemperor
  */
 import React, {useEffect, useState} from "react";
-import {useNodes} from "../../hooks/useNodes";
-import {Node} from "../../models/proxmox/Node";
-import NodeStatusBadge from "../../components/proxmox/Node";
+import {useNodes} from "../../../hooks/useNodes";
+import {Node} from "../../../models/proxmox/Node";
+import NodeStatusBadge from "../../../components/proxmox/Node";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Render the main content of the Nodes page
@@ -16,7 +17,7 @@ export default function Nodes() {
     const {getNodes, errorMessage, isLoading} = useNodes();
 
     const [nodes, setNodes] = useState<Node[]>([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const loadNodes = async () => {
             const nodesData = await getNodes();
@@ -45,8 +46,8 @@ export default function Nodes() {
                         <tbody>
                         {isLoading ? <p>Loading...</p> : null}
                         {errorMessage.error ? <p>{errorMessage.message}</p> : null}
-                        {!isLoading && nodes.map((node) => (
-                            <tr className="clickable-row" key={node.node}>
+                        {!isLoading && nodes.sort((a, b) => a.node > b.node ? 1 : -1).map((node) => (
+                            <tr className="clickable-row" key={node.node} onClick={ () => {navigate(`/proxmox/nodes/${node.node}`)}}>
                                 <td>{node.node}</td>
                                 <td>{NodeStatusBadge(node.status)}</td>
                             </tr>

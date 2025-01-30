@@ -1,20 +1,43 @@
 /**
- * useLXCs
+ * useLXCs / useLXC
+ * File for hooks about LXCs
  * @author: ooemperor
  */
 import {useState} from "react";
 import {ErrorMessage} from "../models/ErrorMessage";
 import {proxmoxService} from "../services/ProxmoxService";
-import {LXCsResponse} from "../models/proxmox/Machines";
+import {LXCResponse, LXCsResponse} from "../models/proxmox/Machines";
 
 /**
  * useLXCs for Proxmox
  * Method used in loading the data in the Route
- * Helper method for later use in useEffect for loading data from the thingy
+ * @param name The name of the LXC
  */
-export const useLXCs = () => {
+export const useLXC = (name: string) => {
     const [errorMessage, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
     const [isLoading, setIsLoading] = useState<Boolean>(false);
+
+    const getLXC = async () => {
+        setIsLoading(true);
+        setErrorMessageProps({error: false, message:''});
+
+        const lxcResponse: LXCResponse = await proxmoxService.getLXC(name);
+        if (!lxcResponse.success) {
+            setErrorMessageProps({error: true, message: lxcResponse.message});
+        }
+        setIsLoading(false);
+        return lxcResponse;
+    }
+    return {getLXC, isLoading, errorMessage};
+}
+
+/**
+ * useLXCs for Proxmox
+ * Method used in loading the data in the Route
+ */
+export const useLXCs = () => {
+    const [errorMessage_lxcs, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
+    const [isLoading_lxcs, setIsLoading] = useState<Boolean>(false);
 
     const getLXCs = async () => {
         setIsLoading(true);
@@ -27,5 +50,5 @@ export const useLXCs = () => {
         setIsLoading(false);
         return lxcsResponse;
     }
-    return {getLXCs, isLoading, errorMessage};
+    return {getLXCs, isLoading_lxcs, errorMessage_lxcs};
 }

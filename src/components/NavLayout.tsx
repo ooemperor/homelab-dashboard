@@ -7,6 +7,7 @@ import SideNav from "./SideNav";
 import {Outlet} from "react-router-dom";
 import React, {ReactNode} from "react";
 
+
 interface LayoutWithNav {
     children: ReactNode;
 }

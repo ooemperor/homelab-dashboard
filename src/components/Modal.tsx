@@ -4,7 +4,14 @@
  */
 import {ReactNode} from "react";
 
-export default function Modal(id: string, header: string, modalBody: ReactNode) {
+/**
+ * Default function to render a generic modal based on the inputs
+ * @param id Id used for the reactnode later
+ * @param header Header title to be set
+ * @param modalBody Body to be set as react node.
+ * @constructor
+ */
+export default function Modal(id: string, header: string, modalBody: ReactNode):ReactNode {
     return (
         <div className={"modal"} id={id}>
             <div className={"modal-dialog"}>
