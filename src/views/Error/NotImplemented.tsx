@@ -12,7 +12,7 @@ export default function NotImplemented() {
                 "row"
             }>
                 <div className="col">
-                    <h1>Under construction</h1>
+                    <h1>Under construction <i className="bi bi-bug-fill"></i></h1>
                 </div>
 
                 <div className="row py-2">
