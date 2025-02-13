@@ -15,6 +15,7 @@ import Node_View from "./views/Proxmox/Node/Node";
 import LXC_View from "./views/Proxmox/LXC/LXC";
 import VM_View from "./views/Proxmox/VM/VM";
 import ProxmoxHome from "./views/Proxmox/ProxmoxHome";
+import NotImplemented from "./views/Error/NotImplemented";
 
 /**
  * Main App run function
@@ -28,6 +29,7 @@ function App() {
                     </NavLayout>
                 }>
                     <Route path="/" element={<Home/>}/>
+                    <Route path="/notImplemented" element={<NotImplemented/>}/>
                     <Route path="/proxmox" element={<ProxmoxHome/>}/>
                     <Route path="/proxmox/nodes" element={<Nodes/>}/>
                     <Route path="/proxmox/nodes/:name" element={<Node_View/>}/>

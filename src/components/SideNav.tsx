@@ -20,7 +20,7 @@ export default function SideNav() {
                     <a className={"nav-link d-inline-block"} href={"/proxmox"}>Proxmox</a>
                 </strong>
                 <ul className="list-unstyled fw-normal pb-2 small">
-                <li className="ps-2">
+                    <li className="ps-2">
                         <a className={"nav-link d-inline-block"} href={"/proxmox/nodes"}>Nodes</a>
                     </li>
                     <li className="ps-2">
@@ -28,6 +28,22 @@ export default function SideNav() {
                     </li>
                     <li className="ps-2">
                         <a className={"nav-link d-inline-block"} href={"/proxmox/vm"}>VM</a>
+                    </li>
+                </ul>
+            </li>
+            <li className={"bd-links-group py-2"}>
+                <strong className="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+                    <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Zabbix</a>
+                </strong>
+                <ul className="list-unstyled fw-normal pb-2 small">
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Hosts</a>
+                    </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Proxies</a>
+                    </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Operations</a>
                     </li>
                 </ul>
             </li>
