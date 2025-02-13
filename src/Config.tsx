@@ -10,6 +10,8 @@
 export class Config{
     proxmoxApi: string | undefined;
     proxmoxApiKey: string | undefined;
+    zabbixApi: string | undefined;
+    zabbixApiKey: string | undefined;
 
     /**
      * Constructor of the config
@@ -18,6 +20,9 @@ export class Config{
 
         this.proxmoxApi = process.env.REACT_APP_PROXMOX_API;
         this.proxmoxApiKey = process.env.REACT_APP_PROXMOX_API_KEY;
+
+        this.zabbixApi = process.env.REACT_APP_ZABBIX_API;
+        this.zabbixApiKey = process.env.REACT_APP_ZABBIX_API_KEY;
     }
 }
 
