@@ -3,15 +3,15 @@
  * @author ooemperor
  */
 import React, {useEffect, useState} from "react";
-import {useNode} from "../../../hooks/useNodes";
-import {useLXCs} from "../../../hooks/useLXCs";
+import {useNode} from "../../../hooks/Proxmox/useNodes";
+import {useLXCs} from "../../../hooks/Proxmox/useLXCs";
 import {Node} from "../../../models/proxmox/Node";
 import {useNavigate, useParams} from "react-router-dom";
-import HardwareStats from "../../../components/proxmox/HardwareStats";
+import HardwareStats from "../../../components/Proxmox/HardwareStats";
 import {LXC, VM} from "../../../models/proxmox/Machines";
-import MachineStatusBadge from "../../../components/proxmox/Machine";
+import MachineStatusBadge from "../../../components/Proxmox/Machine";
 import Accordion from "../../../components/Accordion";
-import {useVMs} from "../../../hooks/useVMs";
+import {useVMs} from "../../../hooks/Proxmox/useVMs";
 
 /**
  * Render the main content of the Nodes page

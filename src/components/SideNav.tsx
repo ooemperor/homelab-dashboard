@@ -21,13 +21,13 @@ export default function SideNav() {
                 </strong>
                 <ul className="list-unstyled fw-normal pb-2 small">
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/proxmox/nodes"}>Nodes</a>
+                        <a className={"nav-link d-inline-block"} href={"/Proxmox/nodes"}>Nodes</a>
                     </li>
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/proxmox/lxc"}>LXC</a>
+                        <a className={"nav-link d-inline-block"} href={"/Proxmox/lxc"}>LXC</a>
                     </li>
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/proxmox/vm"}>VM</a>
+                        <a className={"nav-link d-inline-block"} href={"/Proxmox/vm"}>VM</a>
                     </li>
                 </ul>
             </li>
@@ -37,10 +37,10 @@ export default function SideNav() {
                 </strong>
                 <ul className="list-unstyled fw-normal pb-2 small">
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Hosts</a>
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/hosts"}>Hosts</a>
                     </li>
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Proxies</a>
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/proxy"}>Proxies</a>
                     </li>
                     <li className="ps-2">
                         <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Operations</a>

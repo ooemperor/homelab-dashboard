@@ -4,9 +4,9 @@
  * @author: ooemperor
  */
 import {useState} from "react";
-import {ErrorMessage} from "../models/ErrorMessage";
-import {proxmoxService} from "../services/ProxmoxService";
-import {LXCResponse, LXCsResponse} from "../models/proxmox/Machines";
+import {ErrorMessage} from "../../models/ErrorMessage";
+import {proxmoxService} from "../../services/ProxmoxService";
+import {LXCResponse, LXCsResponse} from "../../models/proxmox/Machines";
 
 /**
  * useLXCs for Proxmox

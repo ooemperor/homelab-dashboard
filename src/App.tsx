@@ -16,6 +16,8 @@ import LXC_View from "./views/Proxmox/LXC/LXC";
 import VM_View from "./views/Proxmox/VM/VM";
 import ProxmoxHome from "./views/Proxmox/ProxmoxHome";
 import NotImplemented from "./views/Error/NotImplemented";
+import ZabbixHosts from "./views/Zabbix/Host/ZabbixHosts";
+import ZabbixProxies from "./views/Zabbix/Proxy/ZabbixProxies";
 
 /**
  * Main App run function
@@ -37,6 +39,8 @@ function App() {
                     <Route path="/proxmox/lxc/:name" element={<LXC_View/>}/>
                     <Route path="/proxmox/vm" element={<VMs/>}/>
                     <Route path="/proxmox/vm/:name" element={<VM_View/>}/>
+                    <Route path="/zabbix/hosts/" element={<ZabbixHosts/>}/>
+                    <Route path="/zabbix/proxy/" element={<ZabbixProxies/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

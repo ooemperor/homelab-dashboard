@@ -3,7 +3,7 @@
  * @author ooemperor
  */
 import React, {useEffect, useState} from "react";
-import {useStatus} from "../../hooks/useStatus";
+import {useStatus} from "../../hooks/Proxmox/useStatus";
 import {Status} from "../../models/proxmox/Status";
 
 /**
@@ -66,8 +66,8 @@ export default function Home() {
                                      style={{"height": "60px"}}/>
                             </div>
                             <div className="card-body">
-                                <a href="/notImplemented" className="btn btn-info mx-3">Hosts</a>
-                                <a href="/notImplemented" className="btn btn-info mx-3">Proxies</a>
+                                <a href="/zabbix/hosts" className="btn btn-info mx-3">Hosts</a>
+                                <a href="/zabbix/proxy" className="btn btn-info mx-3">Proxies</a>
                                 <a href="/notImplemented" className="btn btn-info mx-3">Operations</a>
                             </div>
                         </div>

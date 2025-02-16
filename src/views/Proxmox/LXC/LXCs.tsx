@@ -3,9 +3,9 @@
  * @author ooemperor
  */
 import React, {useEffect, useState} from "react";
-import {useLXCs} from "../../../hooks/useLXCs";
+import {useLXCs} from "../../../hooks/Proxmox/useLXCs";
 import {LXC, MachineStatus} from "../../../models/proxmox/Machines";
-import MachineStatusBadge from "../../../components/proxmox/Machine";
+import MachineStatusBadge from "../../../components/Proxmox/Machine";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 import {useNavigate} from "react-router-dom";

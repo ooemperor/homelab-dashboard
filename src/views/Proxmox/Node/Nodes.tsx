@@ -3,9 +3,9 @@
  * @author ooemperor
  */
 import React, {useEffect, useState} from "react";
-import {useNodes} from "../../../hooks/useNodes";
+import {useNodes} from "../../../hooks/Proxmox/useNodes";
 import {Node} from "../../../models/proxmox/Node";
-import NodeStatusBadge from "../../../components/proxmox/Node";
+import NodeStatusBadge from "../../../components/Proxmox/Node";
 import { useNavigate } from "react-router-dom";
 
 /**

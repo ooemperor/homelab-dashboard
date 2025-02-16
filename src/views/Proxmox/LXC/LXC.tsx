@@ -4,11 +4,11 @@
  */
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import CpuCard from "../../../components/proxmox/StatsCards/CpuCard";
-import {useLXC} from "../../../hooks/useLXCs";
+import CpuCard from "../../../components/Proxmox/StatsCards/CpuCard";
+import {useLXC} from "../../../hooks/Proxmox/useLXCs";
 import {LXC} from "../../../models/proxmox/Machines";
-import MemoryCard from "../../../components/proxmox/StatsCards/MemoryCard";
-import HardwareStats, {HardwareStatsMachineRow} from "../../../components/proxmox/HardwareStats";
+import MemoryCard from "../../../components/Proxmox/StatsCards/MemoryCard";
+import HardwareStats, {HardwareStatsMachineRow} from "../../../components/Proxmox/HardwareStats";
 
 /**
  * Render the main content of the LXC page for a single LXC
