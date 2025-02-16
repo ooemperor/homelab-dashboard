@@ -2,8 +2,9 @@
  * File to define components for using with ZabbixHosts
  */
 import React from "react";
-import {ZabbixHostStatus} from "../../models/zabbix/ZabbixHost";
+import {ZabbixHost, ZabbixHostStatus} from "../../models/zabbix/ZabbixHost";
 import {ZabbixItem} from "../../models/zabbix/ZabbixItem";
+import {PieChart} from "@mui/x-charts";
 
 /**
  * Function to render a Status Badge for a proxmox LXC
@@ -46,7 +47,7 @@ export function ZabbixItemCard(title: string, itemCount: number) {
  * Function to render the HardwareStatsRow
  * @param items The list of items of the Zabbix Host
  */
-export function ZabbixItemStatsRow(items: ZabbixItem[] ) {
+export function ZabbixItemStatsRow(items: ZabbixItem[]) {
     return (
         <div className="row">
             <div className="col">
@@ -54,6 +55,45 @@ export function ZabbixItemStatsRow(items: ZabbixItem[] ) {
             </div>
             <div className="col">
                 {ZabbixItemCard("Unsupported Items", items.filter((element) => element.state === "1").length)}
+            </div>
+        </div>
+    )
+}
+
+export function ZabbixGraphCard(body: any) {
+    return (<div className="card text-center">
+        <div className="card-body">
+            {body}
+        </div>
+    </div>)
+}
+
+export function ZabbixHostGraphRow(items: ZabbixItem[]) {
+    return (
+        <div className="row py-2">
+            <div className="col">
+
+                {items && ZabbixGraphCard(<PieChart
+
+                    series={[
+                        {
+                            data: [
+                                {
+                                    id: 0,
+                                    value: items.filter((element) => element.state === "0").length,
+                                    label: 'supported'
+                                },
+                                {
+                                    id: 1,
+                                    value: items.filter((element) => element.state === "1").length,
+                                    label: 'unsupported'
+                                },
+                            ],
+                        },
+                    ]}
+                    width={400}
+                    height={200}
+                />)}
             </div>
         </div>
     )

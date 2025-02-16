@@ -9,7 +9,7 @@ import {ZabbixHost} from "../../../models/zabbix/ZabbixHost";
 import {useZabbixHost} from "../../../hooks/Zabbix/useZabbixHosts";
 import {useZabbixItems} from "../../../hooks/Zabbix/useZabbixItem";
 import {ZabbixItem} from "../../../models/zabbix/ZabbixItem";
-import {ZabbixItemStatsRow} from "../../../components/Zabbix/ZabbixHost";
+import {ZabbixHostGraphRow, ZabbixItemStatsRow} from "../../../components/Zabbix/ZabbixHost";
 
 export default function ZabbixHost_View() {
     const {id} = useParams();
@@ -58,7 +58,7 @@ export default function ZabbixHost_View() {
                     <h1>Host {isLoading_ZabbixHost ? "" : host && host.host}</h1>
                 </div>
             </div>
-            <div className="row">
+            <div className="row py-2">
                 <div className="col">
                     <p>Host {isLoading_ZabbixHost ? "" : host && host.host}</p>
                 </div>
@@ -66,7 +66,7 @@ export default function ZabbixHost_View() {
             {isLoading_ZabbixHost ? <p>Loading...</p> : null}
             {errorMessage_ZabbixHost.error ? <p>{errorMessage_ZabbixHost.message}</p> : null}
             {items && ZabbixItemStatsRow(items)}
-            
+            {items && ZabbixHostGraphRow(items)}
         </div>
     )
 }
