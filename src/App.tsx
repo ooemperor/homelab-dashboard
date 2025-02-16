@@ -18,6 +18,7 @@ import ProxmoxHome from "./views/Proxmox/ProxmoxHome";
 import NotImplemented from "./views/Error/NotImplemented";
 import ZabbixHosts from "./views/Zabbix/Host/ZabbixHosts";
 import ZabbixProxies from "./views/Zabbix/Proxy/ZabbixProxies";
+import ZabbixProxyGroups from "./views/Zabbix/ProxyGroup/ProxyGroups";
 
 /**
  * Main App run function
@@ -45,7 +46,7 @@ function App() {
                     <Route path="/zabbix/host/:id" element={<NotImplemented/>}/>
                     <Route path="/zabbix/proxy/" element={<ZabbixProxies/>}/>
                     <Route path="/zabbix/proxy/:id" element={<NotImplemented/>}/>
-                    <Route path="/zabbix/proxygroup/" element={<ZabbixProxies/>}/>
+                    <Route path="/zabbix/proxygroup/" element={<ZabbixProxyGroups/>}/>
                     <Route path="/zabbix/proxygroup/:id" element={<NotImplemented/>}/>
                     <Route path="/zabbix/operations/" element={<NotImplemented/>}/>
                 </Route>

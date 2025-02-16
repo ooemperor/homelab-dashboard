@@ -6,9 +6,8 @@
  * @author ooemperor
  */
 import {config} from "../Config";
-import {ZabbixApiResponse, ZabbixResponse} from "../models/zabbix/ApiResponse";
+import {ZabbixResponse} from "../models/zabbix/ApiResponse";
 import {ZabbixHostResponse, ZabbixHostsResponse} from "../models/zabbix/ZabbixHost";
-import {NodesResponse} from "../models/proxmox/Node";
 import {ZabbixProxiesResponse, ZabbixProxyResponse} from "../models/zabbix/ZabbixProxy";
 import {ZabbixProxyGroupResponse, ZabbixProxyGroupsResponse} from "../models/zabbix/ZabbixProxyGroup";
 import {ZabbixItemResponse, ZabbixItemsResponse} from "../models/zabbix/ZabbixItem";
@@ -33,7 +32,7 @@ class ZabbixService {
      * @private
      */
     private async executeApiCall(body: any): Promise<ZabbixResponse> {
-        let zabbixResponse : ZabbixResponse = {success: false, response: null, message: ''};
+        let zabbixResponse: ZabbixResponse = {success: false, response: null, message: ''};
         try {
             const response: Response = await fetch(`${this.baseUrl}`, {
                 method: 'POST',
@@ -48,18 +47,62 @@ class ZabbixService {
 
             const raw_json = await response.json();
             if (raw_json.error != null) {
-                zabbixResponse.message = raw_json.error.message +  " " + raw_json.data.data;
+                zabbixResponse.message = raw_json.error.message + " " + raw_json.data.data;
                 return zabbixResponse;
             }
 
             zabbixResponse.response = raw_json;
             zabbixResponse.success = true;
             return zabbixResponse;
-        }
-        catch (error: any) {
+        } catch (error: any) {
             console.log(error);
         }
         return zabbixResponse;
+    }
+
+    /**
+     * Prepare and return the body for the execution of a api call to zabbix
+     * @param object the resource you want to access (e.g. host)
+     * @param method what you want to do on the ressource (e.g. get)
+     * @param additional_params any datatype for passing additional params to the body constructor
+     * @param unsupported boolean flag for filtering items
+     * @param count flag to determine if the output should be counted or not
+     * @private
+     */
+    private prepareBody(object: string, method: string, additional_params: any = null, unsupported: boolean = false, count: boolean = false) {
+        let baseBody =  {
+            "jsonrpc": "2.0",
+            "method": `${object}.${method}`,
+            "params": {
+                "output": "extend",
+                "filter": {}
+            },
+            "id": 2,
+            "auth": this.apiToken,
+        }
+
+        // if only unsupported items want to be seen
+        if (unsupported && object === "item") {
+            baseBody.params.filter = {
+                "state": 1,
+                "status": 0
+            }
+        }
+
+        // if the output should be counted or not
+        if (count) {
+            // @ts-ignore
+            baseBody.params["countOutput"] = "1"
+        }
+
+        if (additional_params !== null) {
+            for (let key in additional_params) {
+                // @ts-ignore
+                baseBody.params[key] = additional_params[key];
+            }
+        }
+
+        return baseBody
     }
 
     /**
@@ -67,16 +110,9 @@ class ZabbixService {
      */
     async getHosts(): Promise<ZabbixHostsResponse> {
         let hostsResponse: ZabbixHostsResponse = {success: false, hosts: [], message: ''};
-        const host_body = {
-            "jsonrpc": "2.0",
-            "method": "host.get",
-            "params": {
-                "output": "extend"
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(host_body);
+        const body = this.prepareBody("host", "get")
+
+        const genericResponse = await this.executeApiCall(body);
         hostsResponse.success = genericResponse.success;
         hostsResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -91,19 +127,10 @@ class ZabbixService {
      */
     async getHost(id: string): Promise<ZabbixHostResponse> {
         let hostResponse: ZabbixHostResponse = {success: false, host: null, message: ''};
-        const host_body = {
-            "jsonrpc": "2.0",
-            "method": "host.get",
-            "params": {
-                "output": "extend",
-                "hostids": [
-                    id
-                ]
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(host_body);
+        const filters = {"hostids": [id]}
+        const body = this.prepareBody("host", "get", filters)
+
+        const genericResponse = await this.executeApiCall(body);
         hostResponse.success = genericResponse.success;
         hostResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -117,16 +144,8 @@ class ZabbixService {
      */
     async getProxies(): Promise<ZabbixProxiesResponse> {
         let proxiesResponse: ZabbixProxiesResponse = {success: false, proxies: [], message: ''};
-        const proxy_body = {
-            "jsonrpc": "2.0",
-            "method": "proxy.get",
-            "params": {
-                "output": "extend"
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(proxy_body);
+        const body = this.prepareBody("proxy", "get")
+        const genericResponse = await this.executeApiCall(body);
         proxiesResponse.success = genericResponse.success;
         proxiesResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -141,19 +160,9 @@ class ZabbixService {
      */
     async getProxy(id: string): Promise<ZabbixProxyResponse> {
         let proxyResponse: ZabbixProxyResponse = {success: false, proxy: null, message: ''};
-        const proxy_body = {
-            "jsonrpc": "2.0",
-            "method": "proxy.get",
-            "params": {
-                "output": "extend",
-                "proxyids": [
-                    id
-                ]
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(proxy_body);
+        const filters = {"proxyids": [id]}
+        const body = this.prepareBody("proxy", "get", filters);
+        const genericResponse = await this.executeApiCall(body);
         proxyResponse.success = genericResponse.success;
         proxyResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -167,16 +176,8 @@ class ZabbixService {
      */
     async getProxyGroups(): Promise<ZabbixProxyGroupsResponse> {
         let proxyGroupsResponse: ZabbixProxyGroupsResponse = {success: false, proxyGroups: [], message: ''};
-        const proxy_body = {
-            "jsonrpc": "2.0",
-            "method": "proxygroup.get",
-            "params": {
-                "output": "extend"
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(proxy_body);
+        const body = this.prepareBody("proxygroup", "get")
+        const genericResponse = await this.executeApiCall(body);
         proxyGroupsResponse.success = genericResponse.success;
         proxyGroupsResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -191,19 +192,9 @@ class ZabbixService {
      */
     async getProxyGroup(id: string): Promise<ZabbixProxyGroupResponse> {
         let proxyGroupResponse: ZabbixProxyGroupResponse = {success: false, proxyGroup: null, message: ''};
-        const proxy_body = {
-            "jsonrpc": "2.0",
-            "method": "proxygroup.get",
-            "params": {
-                "output": "extend",
-                "proxy_groupids": [
-                    id
-                ]
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(proxy_body);
+        const filters = {"proxy_groupids": [id]}
+        const body = this.prepareBody("proxygroup", "get", filters);
+        const genericResponse = await this.executeApiCall(body);
         proxyGroupResponse.success = genericResponse.success;
         proxyGroupResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -213,20 +204,14 @@ class ZabbixService {
     }
 
     /**
-     * Function to fetch allItems
+     * Function to fetch all items from Zabbix
+     * @param unsupported Flag to only select unsupported items or not
+     * @param count Flag to indicate if the output should be counted or not
      */
-    async getItems(): Promise<ZabbixItemsResponse> {
+    async getItems(unsupported: boolean = false, count: boolean = false): Promise<ZabbixItemsResponse> {
         let itemsResponse: ZabbixItemsResponse = {success: false, items: [], message: ''};
-        const item_body = {
-            "jsonrpc": "2.0",
-            "method": "item.get",
-            "params": {
-                "output": "extend"
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(item_body);
+        const body = this.prepareBody("host", "get")
+        const genericResponse = await this.executeApiCall(body);
         itemsResponse.success = genericResponse.success;
         itemsResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
@@ -238,22 +223,14 @@ class ZabbixService {
     /**
      * Function to fetch some itemsallItems
      * @param id The identifier of the item
+     * @param unsupported if it should query for unsupported items or not
      */
-    async getItem(id: string): Promise<ZabbixItemResponse> {
+    async getItem(id: string, unsupported: boolean): Promise<ZabbixItemResponse> {
         let itemResponse: ZabbixItemResponse = {success: false, item: null, message: ''};
-        const item_body = {
-            "jsonrpc": "2.0",
-            "method": "item.get",
-            "params": {
-                "output": "extend",
-                "itemids": [
-                    id
-                ]
-            },
-            "id": 2,
-            "auth": this.apiToken,
-        }
-        const genericResponse = await this.executeApiCall(item_body);
+        const filters = {"itemids": [id]}
+        const body = this.prepareBody("item", "get", filters);
+
+        const genericResponse = await this.executeApiCall(body);
         itemResponse.success = genericResponse.success;
         itemResponse.message = genericResponse.message;
         if (genericResponse.response != null) {
