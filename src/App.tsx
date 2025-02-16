@@ -39,8 +39,15 @@ function App() {
                     <Route path="/proxmox/lxc/:name" element={<LXC_View/>}/>
                     <Route path="/proxmox/vm" element={<VMs/>}/>
                     <Route path="/proxmox/vm/:name" element={<VM_View/>}/>
-                    <Route path="/zabbix/hosts/" element={<ZabbixHosts/>}/>
+
+                    <Route path="/zabbix/" element={<NotImplemented/>}/>
+                    <Route path="/zabbix/host/" element={<ZabbixHosts/>}/>
+                    <Route path="/zabbix/host/:id" element={<NotImplemented/>}/>
                     <Route path="/zabbix/proxy/" element={<ZabbixProxies/>}/>
+                    <Route path="/zabbix/proxy/:id" element={<NotImplemented/>}/>
+                    <Route path="/zabbix/proxygroup/" element={<ZabbixProxies/>}/>
+                    <Route path="/zabbix/proxygroup/:id" element={<NotImplemented/>}/>
+                    <Route path="/zabbix/operations/" element={<NotImplemented/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

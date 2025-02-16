@@ -11,7 +11,8 @@ export enum ZabbixProxyGroupStatus {
     unknown = "0",
     Offline = "1",
     Recovering = "2",
-    Degrading = "3"
+    Online = "3",
+    Degrading = "4"
 }
 
 /**

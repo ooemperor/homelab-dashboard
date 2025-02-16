@@ -33,17 +33,20 @@ export default function SideNav() {
             </li>
             <li className={"bd-links-group py-2"}>
                 <strong className="bd-links-heading d-flex w-100 align-items-center fw-semibold">
-                    <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Zabbix</a>
+                    <a className={"nav-link d-inline-block"} href={"/zabbix"}>Zabbix</a>
                 </strong>
                 <ul className="list-unstyled fw-normal pb-2 small">
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/zabbix/hosts"}>Hosts</a>
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/host"}>Hosts</a>
                     </li>
                     <li className="ps-2">
                         <a className={"nav-link d-inline-block"} href={"/zabbix/proxy"}>Proxies</a>
                     </li>
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/notImplemented"}>Operations</a>
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/proxygroup"}>ProxyGroup</a>
+                    </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/operations"}>Operations</a>
                     </li>
                 </ul>
             </li>

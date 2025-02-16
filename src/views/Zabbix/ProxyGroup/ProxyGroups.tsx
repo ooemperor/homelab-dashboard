@@ -8,31 +8,19 @@ import {useNavigate} from "react-router-dom";
 import {useZabbixProxies} from "../../../hooks/Zabbix/useZabbixProxy";
 import {useZabbixProxyGroups} from "../../../hooks/Zabbix/useZabbixProxyGroup";
 import {ZabbixProxy} from "../../../models/zabbix/ZabbixProxy";
-import {ZabbixProxyGroup} from "../../../models/zabbix/ZabbixProxyGroup";
+import {ZabbixProxyGroup, ZabbixProxyGroupStatus} from "../../../models/zabbix/ZabbixProxyGroup";
 import ZabbixProxyStatusBadge from "../../../components/Zabbix/ZabbixProxy";
+import ZabbixProxyGroupStatusBadge from "../../../components/Zabbix/ZabbixProxyGroup";
 
-export default function ZabbixProxies() {
+export default function ZabbixProxyGroups() {
 
-    const {getZabbixProxies, errorMessage_ZabbixProxies, isLoading_ZabbixProxies} = useZabbixProxies();
     const {getZabbixProxyGroups, errorMessage_ZabbixProxyGroups, isLoading_ZabbixProxyGroups} = useZabbixProxyGroups();
 
 
-    const [proxies, setProxies] = useState<ZabbixProxy[]>([]);
-    const [proxygroups, setProxyGroups] = useState<ZabbixProxyGroup[]>([]);
+    const [proxyGroups, setProxyGroups] = useState<ZabbixProxyGroup[]>([]);
 
     const navigate = useNavigate();
     useEffect(() => {
-
-        //loading information about the proxies
-        const loadProxies = async () => {
-            const proxyData = await getZabbixProxies();
-            if (proxyData.proxies === null){
-                setProxies([]);
-            } else {
-                setProxies(proxyData.proxies);
-            }
-
-        }
 
         // loading information about the proxygroups
         const loadProxyGroups = async () => {
@@ -45,20 +33,9 @@ export default function ZabbixProxies() {
 
         }
 
-        loadProxies();
         loadProxyGroups()
 
     }, []);
-
-    function getProxyGroupName(proxyGroupId: string): string {
-        const proxygroup = proxygroups.find((element) => element.proxy_groupid === proxyGroupId);
-        if (proxygroup === undefined){
-            return ""
-        }
-        else {
-            return proxygroup.name
-        }
-    }
 
     return (
         <div className="container">
@@ -78,16 +55,14 @@ export default function ZabbixProxies() {
                         </tr>
                         </thead>
                         <tbody>
-                        {isLoading_ZabbixProxies ? <p>Loading...</p> : null}
-                        {isLoading_ZabbixProxyGroups ? null : null}
-                        {errorMessage_ZabbixProxies.error ? <p>{errorMessage_ZabbixProxies.message}</p> : null}
-                        {!isLoading_ZabbixProxies && proxies.sort((a, b) => a.name > b.name ? 1 : -1).map((proxy) => (
-                            <tr className="clickable-row" key={proxy.name} onClick={() => {
-                                navigate(`/zabbix/proxy/${proxy.proxyid}`)
+                        {isLoading_ZabbixProxyGroups ? <p>Loading...</p> : null}
+                        {errorMessage_ZabbixProxyGroups.error ? <p>{errorMessage_ZabbixProxyGroups.message}</p> : null}
+                        {!isLoading_ZabbixProxyGroups && proxyGroups.sort((a, b) => a.name > b.name ? 1 : -1).map((proxyGroup) => (
+                            <tr className="clickable-row" key={proxyGroup.name} onClick={() => {
+                                navigate(`/zabbix/proxy/${proxyGroup.proxy_groupid}`)
                             }}>
-                                <td>{proxy.name}</td>
-                                <td>{ZabbixProxyStatusBadge(proxy.state)}</td>
-                                <td>{proxy.proxy_groupid === "0" ? "" : getProxyGroupName(proxy.proxy_groupid)}</td>
+                                <td>{proxyGroup.name}</td>
+                                <td>{ZabbixProxyGroupStatusBadge(proxyGroup.state)}</td>
                             </tr>
                         ))}
                         </tbody>

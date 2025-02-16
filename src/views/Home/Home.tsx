@@ -66,9 +66,9 @@ export default function Home() {
                                      style={{"height": "60px"}}/>
                             </div>
                             <div className="card-body">
-                                <a href="/zabbix/hosts" className="btn btn-info mx-3">Hosts</a>
+                                <a href="/zabbix/host" className="btn btn-info mx-3">Hosts</a>
                                 <a href="/zabbix/proxy" className="btn btn-info mx-3">Proxies</a>
-                                <a href="/notImplemented" className="btn btn-info mx-3">Operations</a>
+                                <a href="/zabbix/proxygroup" className="btn btn-info mx-3">Operations</a>
                             </div>
                         </div>
                     </div>
