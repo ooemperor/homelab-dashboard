@@ -19,6 +19,7 @@ import NotImplemented from "./views/Error/NotImplemented";
 import ZabbixHosts from "./views/Zabbix/Host/ZabbixHosts";
 import ZabbixProxies from "./views/Zabbix/Proxy/ZabbixProxies";
 import ZabbixProxyGroups from "./views/Zabbix/ProxyGroup/ProxyGroups";
+import ZabbixHost_View from "./views/Zabbix/Host/ZabbixHost";
 
 /**
  * Main App run function
@@ -43,7 +44,7 @@ function App() {
 
                     <Route path="/zabbix/" element={<NotImplemented/>}/>
                     <Route path="/zabbix/host/" element={<ZabbixHosts/>}/>
-                    <Route path="/zabbix/host/:id" element={<NotImplemented/>}/>
+                    <Route path="/zabbix/host/:id" element={<ZabbixHost_View/>}/>
                     <Route path="/zabbix/proxy/" element={<ZabbixProxies/>}/>
                     <Route path="/zabbix/proxy/:id" element={<NotImplemented/>}/>
                     <Route path="/zabbix/proxygroup/" element={<ZabbixProxyGroups/>}/>

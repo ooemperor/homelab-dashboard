@@ -18,8 +18,8 @@ import {
  * Method used in loading the data in the Route
  */
 export const useZabbixProxyGroup = (id: string) => {
-    const [errorMessage_ZabbixProxy, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
-    const [isLoading_ZabbixProxy, setIsLoading] = useState<Boolean>(false);
+    const [errorMessage_ZabbixProxyGroup, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
+    const [isLoading_ZabbixProxyGroup, setIsLoading] = useState<Boolean>(false);
 
     const getZabbixProxyGroup = async () => {
         setIsLoading(true);
@@ -33,7 +33,7 @@ export const useZabbixProxyGroup = (id: string) => {
         return proxyGroupResponse;
     }
 
-    return {getZabbixProxyGroup, errorMessage_ZabbixProxy, isLoading_ZabbixProxy};
+    return {getZabbixProxyGroup, errorMessage_ZabbixProxyGroup, isLoading_ZabbixProxyGroup};
 }
 
 /**

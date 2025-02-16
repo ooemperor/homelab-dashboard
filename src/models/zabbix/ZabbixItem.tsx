@@ -51,6 +51,7 @@ export interface ZabbixItem {
     history: string,
     trends: string,
     status: ZabbixItemStatus,
+    state: string,
     lastns: string,
     lastvalue: string,
     prevvalue: string

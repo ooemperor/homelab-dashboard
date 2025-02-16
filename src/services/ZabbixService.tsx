@@ -205,12 +205,13 @@ class ZabbixService {
 
     /**
      * Function to fetch all items from Zabbix
+     * @param additional_params any datatype for passing additional params to the body constructor
      * @param unsupported Flag to only select unsupported items or not
      * @param count Flag to indicate if the output should be counted or not
      */
-    async getItems(unsupported: boolean = false, count: boolean = false): Promise<ZabbixItemsResponse> {
+    async getItems(additional_params: any = null, unsupported: boolean = false, count: boolean = false): Promise<ZabbixItemsResponse> {
         let itemsResponse: ZabbixItemsResponse = {success: false, items: [], message: ''};
-        const body = this.prepareBody("host", "get")
+        const body = this.prepareBody("item", "get", additional_params)
         const genericResponse = await this.executeApiCall(body);
         itemsResponse.success = genericResponse.success;
         itemsResponse.message = genericResponse.message;
@@ -225,7 +226,7 @@ class ZabbixService {
      * @param id The identifier of the item
      * @param unsupported if it should query for unsupported items or not
      */
-    async getItem(id: string, unsupported: boolean): Promise<ZabbixItemResponse> {
+    async getItem(id: string, unsupported: boolean = false): Promise<ZabbixItemResponse> {
         let itemResponse: ZabbixItemResponse = {success: false, item: null, message: ''};
         const filters = {"itemids": [id]}
         const body = this.prepareBody("item", "get", filters);

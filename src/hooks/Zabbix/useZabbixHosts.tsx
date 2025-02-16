@@ -12,11 +12,11 @@ import {zabbixService} from "../../services/ZabbixService";
  * useZabbixHost for Zabbix
  * Method used in loading the data in the Route
  */
-export const useZabbixHost = (id: string) => {
+export const useZabbixHost = () => {
     const [errorMessage_ZabbixHost, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
     const [isLoading_ZabbixHost, setIsLoading] = useState<Boolean>(false);
 
-    const getZabbixHost = async () => {
+    const getZabbixHost = async (id: string) => {
         setIsLoading(true);
         setErrorMessageProps({error: false, message:''});
 
