@@ -4,8 +4,8 @@
  */
 import React, {useEffect, useState} from "react";
 import {VM} from "../../../models/proxmox/Machines";
-import {useVMs} from "../../../hooks/useVMs";
-import MachineStatusBadge from "../../../components/proxmox/Machine";
+import {useVMs} from "../../../hooks/Proxmox/useVMs";
+import MachineStatusBadge from "../../../components/Proxmox/Machine";
 import {useNavigate} from "react-router-dom";
 
 export default function VMs() {

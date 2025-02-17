@@ -5,10 +5,10 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {VM} from "../../../models/proxmox/Machines";
-import {useVM} from "../../../hooks/useVMs";
-import CpuCard from "../../../components/proxmox/StatsCards/CpuCard";
-import MemoryCard from "../../../components/proxmox/StatsCards/MemoryCard";
-import HardwareStats, {HardwareStatsMachineRow} from "../../../components/proxmox/HardwareStats";
+import {useVM} from "../../../hooks/Proxmox/useVMs";
+import CpuCard from "../../../components/Proxmox/StatsCards/CpuCard";
+import MemoryCard from "../../../components/Proxmox/StatsCards/MemoryCard";
+import HardwareStats, {HardwareStatsMachineRow} from "../../../components/Proxmox/HardwareStats";
 
 /**
  * Render the main content of the Nodes page

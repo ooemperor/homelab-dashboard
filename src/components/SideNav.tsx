@@ -20,14 +20,33 @@ export default function SideNav() {
                     <a className={"nav-link d-inline-block"} href={"/proxmox"}>Proxmox</a>
                 </strong>
                 <ul className="list-unstyled fw-normal pb-2 small">
-                <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/proxmox/nodes"}>Nodes</a>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/Proxmox/nodes"}>Nodes</a>
                     </li>
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/proxmox/lxc"}>LXC</a>
+                        <a className={"nav-link d-inline-block"} href={"/Proxmox/lxc"}>LXC</a>
                     </li>
                     <li className="ps-2">
-                        <a className={"nav-link d-inline-block"} href={"/proxmox/vm"}>VM</a>
+                        <a className={"nav-link d-inline-block"} href={"/Proxmox/vm"}>VM</a>
+                    </li>
+                </ul>
+            </li>
+            <li className={"bd-links-group py-2"}>
+                <strong className="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+                    <a className={"nav-link d-inline-block"} href={"/zabbix"}>Zabbix</a>
+                </strong>
+                <ul className="list-unstyled fw-normal pb-2 small">
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/host"}>Hosts</a>
+                    </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/proxy"}>Proxies</a>
+                    </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/proxygroup"}>ProxyGroup</a>
+                    </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/zabbix/operations"}>Operations</a>
                     </li>
                 </ul>
             </li>

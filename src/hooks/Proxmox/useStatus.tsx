@@ -6,9 +6,9 @@
 
 
 import {useState} from "react";
-import {ErrorMessage} from "../models/ErrorMessage";
-import {proxmoxService} from "../services/ProxmoxService";
-import {StatusResponse} from "../models/proxmox/Status";
+import {ErrorMessage} from "../../models/ErrorMessage";
+import {proxmoxService} from "../../services/ProxmoxService";
+import {StatusResponse} from "../../models/proxmox/Status";
 
 /**
  * useStatus for Proxmox

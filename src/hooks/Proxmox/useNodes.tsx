@@ -4,9 +4,9 @@
  * @author: ooemperor
  */
 import {useState} from "react";
-import {ErrorMessage} from "../models/ErrorMessage";
-import {NodeResponse, NodesResponse} from "../models/proxmox/Node";
-import {proxmoxService} from "../services/ProxmoxService";
+import {ErrorMessage} from "../../models/ErrorMessage";
+import {NodeResponse, NodesResponse} from "../../models/proxmox/Node";
+import {proxmoxService} from "../../services/ProxmoxService";
 
 /**
  * useNode for Proxmox
