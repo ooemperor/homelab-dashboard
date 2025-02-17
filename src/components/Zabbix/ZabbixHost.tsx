@@ -2,9 +2,11 @@
  * File to define components for using with ZabbixHosts
  */
 import React from "react";
-import {ZabbixHost, ZabbixHostStatus} from "../../models/zabbix/ZabbixHost";
+import {ZabbixHostStatus} from "../../models/zabbix/ZabbixHost";
 import {ZabbixItem} from "../../models/zabbix/ZabbixItem";
-import {PieChart} from "@mui/x-charts";
+import {axisClasses, barElementClasses, PieChart} from "@mui/x-charts";
+import {colors} from "@mui/material";
+import {ChartsLegendRoot} from "@mui/x-charts/ChartsLegend/LegendPerItem";
 
 /**
  * Function to render a Status Badge for a proxmox LXC
@@ -77,20 +79,33 @@ export function ZabbixHostGraphRow(items: ZabbixItem[]) {
 
                     series={[
                         {
+                            innerRadius: 30,
+                            outerRadius: 100,
+                            paddingAngle: 3,
+                            cornerRadius: 2,
+                            startAngle: 0,
+                            endAngle: 360,
                             data: [
                                 {
                                     id: 0,
                                     value: items.filter((element) => element.state === "0").length,
-                                    label: 'supported'
+                                    label: 'supported',
+                                    color: '#34af67'
                                 },
                                 {
                                     id: 1,
                                     value: items.filter((element) => element.state === "1").length,
-                                    label: 'unsupported'
+                                    label: 'unsupported',
+                                    color: 'red'
                                 },
                             ],
                         },
                     ]}
+                    slotProps={{
+                        legend: {
+                            labelStyle: {fill: "white"}, // Change legend text color
+                        },
+                    }}
                     width={400}
                     height={200}
                 />)}
@@ -98,3 +113,5 @@ export function ZabbixHostGraphRow(items: ZabbixItem[]) {
         </div>
     )
 }
+
+
