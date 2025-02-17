@@ -20,6 +20,8 @@ import ZabbixHosts from "./views/Zabbix/Host/ZabbixHosts";
 import ZabbixProxies from "./views/Zabbix/Proxy/ZabbixProxies";
 import ZabbixProxyGroups from "./views/Zabbix/ProxyGroup/ProxyGroups";
 import ZabbixHost_View from "./views/Zabbix/Host/ZabbixHost";
+import ZabbixProxy_View from "./views/Zabbix/Proxy/ZabbixProxy";
+import ZabbixProxyGroup_View from "./views/Zabbix/ProxyGroup/ZabbixProxyGroup";
 
 /**
  * Main App run function
@@ -46,9 +48,9 @@ function App() {
                     <Route path="/zabbix/host/" element={<ZabbixHosts/>}/>
                     <Route path="/zabbix/host/:id" element={<ZabbixHost_View/>}/>
                     <Route path="/zabbix/proxy/" element={<ZabbixProxies/>}/>
-                    <Route path="/zabbix/proxy/:id" element={<NotImplemented/>}/>
+                    <Route path="/zabbix/proxy/:id" element={<ZabbixProxy_View/>}/>
                     <Route path="/zabbix/proxygroup/" element={<ZabbixProxyGroups/>}/>
-                    <Route path="/zabbix/proxygroup/:id" element={<NotImplemented/>}/>
+                    <Route path="/zabbix/proxygroup/:id" element={<ZabbixProxyGroup_View/>}/>
                     <Route path="/zabbix/operations/" element={<NotImplemented/>}/>
                 </Route>
             </Routes>

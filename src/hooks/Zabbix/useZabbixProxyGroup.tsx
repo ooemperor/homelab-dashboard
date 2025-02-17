@@ -17,11 +17,11 @@ import {
  * useZabbixProxyGroup for Zabbix
  * Method used in loading the data in the Route
  */
-export const useZabbixProxyGroup = (id: string) => {
+export const useZabbixProxyGroup = () => {
     const [errorMessage_ZabbixProxyGroup, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
     const [isLoading_ZabbixProxyGroup, setIsLoading] = useState<Boolean>(false);
 
-    const getZabbixProxyGroup = async () => {
+    const getZabbixProxyGroup = async (id: string) => {
         setIsLoading(true);
         setErrorMessageProps({error: false, message:''});
 

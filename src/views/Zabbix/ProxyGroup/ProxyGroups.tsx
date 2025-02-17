@@ -59,7 +59,7 @@ export default function ZabbixProxyGroups() {
                         {errorMessage_ZabbixProxyGroups.error ? <p>{errorMessage_ZabbixProxyGroups.message}</p> : null}
                         {!isLoading_ZabbixProxyGroups && proxyGroups.sort((a, b) => a.name > b.name ? 1 : -1).map((proxyGroup) => (
                             <tr className="clickable-row" key={proxyGroup.name} onClick={() => {
-                                navigate(`/zabbix/proxy/${proxyGroup.proxy_groupid}`)
+                                navigate(`/zabbix/proxygroup/${proxyGroup.proxy_groupid}`)
                             }}>
                                 <td>{proxyGroup.name}</td>
                                 <td>{ZabbixProxyGroupStatusBadge(proxyGroup.state)}</td>

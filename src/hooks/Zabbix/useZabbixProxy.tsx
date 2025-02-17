@@ -12,11 +12,11 @@ import {ZabbixProxiesResponse, ZabbixProxyResponse} from "../../models/zabbix/Za
  * useZabbixProxy for Zabbix
  * Method used in loading the data in the Route
  */
-export const useZabbixProxy = (id: string) => {
+export const useZabbixProxy = () => {
     const [errorMessage_ZabbixProxy, setErrorMessageProps] = useState<ErrorMessage>({error: false, message: ''});
     const [isLoading_ZabbixProxy, setIsLoading] = useState<Boolean>(false);
 
-    const getZabbixProxy = async () => {
+    const getZabbixProxy = async (id: string) => {
         setIsLoading(true);
         setErrorMessageProps({error: false, message:''});
 
