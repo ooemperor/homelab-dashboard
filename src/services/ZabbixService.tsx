@@ -12,7 +12,7 @@ import {ZabbixProxiesResponse, ZabbixProxyResponse} from "../models/zabbix/Zabbi
 import {ZabbixProxyGroupResponse, ZabbixProxyGroupsResponse} from "../models/zabbix/ZabbixProxyGroup";
 import {ZabbixItemResponse, ZabbixItemsResponse} from "../models/zabbix/ZabbixItem";
 
-class ZabbixService {
+export class ZabbixService {
     apiToken: string | undefined;
     baseUrl: string | undefined;
 

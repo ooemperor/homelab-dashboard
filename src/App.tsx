@@ -52,6 +52,14 @@ function App() {
                     <Route path="/zabbix/proxygroup/" element={<ZabbixProxyGroups/>}/>
                     <Route path="/zabbix/proxygroup/:id" element={<ZabbixProxyGroup_View/>}/>
                     <Route path="/zabbix/operations/" element={<NotImplemented/>}/>
+
+                    <Route path="/haproxy/" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/frontend/" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/frontend/:id" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/backend/" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/backend/:id" element={<NotImplemented/>}/>
+
+
                 </Route>
             </Routes>
         </BrowserRouter>

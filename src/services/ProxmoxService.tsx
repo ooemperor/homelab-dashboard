@@ -10,7 +10,7 @@ import {config} from "../Config";
 import {LXCResponse, LXCsResponse, VMResponse, VMsResponse} from "../models/proxmox/Machines";
 import {StatusResponse} from "../models/proxmox/Status";
 
-class ProxmoxService {
+export class ProxmoxService {
     apiToken: string | undefined;
     baseUrl: string | undefined;
 
