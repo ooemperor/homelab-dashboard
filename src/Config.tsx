@@ -1,6 +1,6 @@
 /**
  * Config file for the Dashboard project
- * Reads the config out of the .env file
+ * Reads the config out of the .env.sample file
  * @author ooemperor
  */
 
