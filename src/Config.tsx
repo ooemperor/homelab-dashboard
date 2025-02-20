@@ -20,10 +20,10 @@ export class Config{
     constructor() {
 
         this.proxmoxApi = process.env.REACT_APP_PROXMOX_API;
-        this.proxmoxApiKey = process.env.REACT_APP_PROXMOX_API_KEY;
+        this.proxmoxApiKey = process.env.REACT_APP_PROXMOX_KEY;
 
         this.zabbixApi = process.env.REACT_APP_ZABBIX_API;
-        this.zabbixApiKey = process.env.REACT_APP_ZABBIX_API_KEY;
+        this.zabbixApiKey = process.env.REACT_APP_ZABBIX_KEY;
 
         this.haproxyApi = process.env.REACT_APP_HAPROXY_API;
     }
