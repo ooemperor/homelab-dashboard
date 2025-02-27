@@ -78,7 +78,7 @@ export default function ZabbixProxies() {
                         </tr>
                         </thead>
                         <tbody>
-                        {isLoading_ZabbixProxies ? <p>Loading...</p> : null}
+                        {isLoading_ZabbixProxies ? null : null}
                         {isLoading_ZabbixProxyGroups ? null : null}
                         {errorMessage_ZabbixProxies.error ? <p>{errorMessage_ZabbixProxies.message}</p> : null}
                         {!isLoading_ZabbixProxies && proxies.sort((a, b) => a.name > b.name ? 1 : -1).map((proxy) => (
