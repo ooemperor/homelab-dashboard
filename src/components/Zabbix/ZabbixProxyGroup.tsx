@@ -1,9 +1,9 @@
 /**
  * File to define components for using with ZabbixProxyGroup
+ * @author ooemperor
  */
-import React from "react";
-import {ZabbixProxyStatus} from "../../models/zabbix/ZabbixProxy";
 import {ZabbixProxyGroupStatus} from "../../models/zabbix/ZabbixProxyGroup";
+import {StatusBadgeError, StatusBadgeSuccess, StatusBadgeWarning} from "../StatusBadges";
 
 /**
  * Function to render a Status Badge for a proxmox LXC
@@ -12,14 +12,14 @@ import {ZabbixProxyGroupStatus} from "../../models/zabbix/ZabbixProxyGroup";
  */
 export default function ZabbixProxyGroupStatusBadge(status: ZabbixProxyGroupStatus) {
     if (status === ZabbixProxyGroupStatus.Online) {
-        return <span className="badge text-bg-success">Online</span>
+        return StatusBadgeSuccess("Online");
     } else if (status === ZabbixProxyGroupStatus.Offline) {
-        return <span className="badge text-bg-danger">Offline</span>
+        return StatusBadgeError("Offline");
     } else if (status === ZabbixProxyGroupStatus.Degrading) {
-        return <span className="badge text-bg-danger">Degrading</span>
+        return StatusBadgeError("Degrading");
     } else if (status === ZabbixProxyGroupStatus.Recovering) {
-        return <span className="badge text-bg-warning">Recovering</span>
+        return StatusBadgeWarning("Recovering");
     } else {
-        return <span className="badge text-bg-danger">Unkown</span>
+        return StatusBadgeError("Unknown");
     }
 }

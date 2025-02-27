@@ -51,7 +51,6 @@ export default function ZabbixProxyGroups() {
                         <tr>
                             <th>Proxy</th>
                             <th>State</th>
-                            <th>ProxyGroup</th>
                         </tr>
                         </thead>
                         <tbody>

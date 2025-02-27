@@ -5,6 +5,7 @@
  */
 import {config} from "../Config";
 import {List} from "@mui/material";
+import {HaProxyStatItem, HaProxyStatsResponse, HAProxyStatsStatus} from "../models/haproxy/HAProxyStatsResponse";
 
 
 export class HAProxyService {
@@ -18,8 +19,8 @@ export class HAProxyService {
         this.baseUrl = baseUrl;
     }
 
-    async getStats(): Promise<any> {
-        let statsResponse: any = {success: false, data: null, message: ''};
+    async getStats(): Promise<HaProxyStatsResponse> {
+        let statsResponse: HaProxyStatsResponse = {success: false, response: null, message: ''};
 
         try {
             const response: Response = await fetch(`${this.baseUrl}/stats;csv`, {
@@ -34,16 +35,64 @@ export class HAProxyService {
             const csvData = await response.text();
 
            
-            statsResponse.data = this.parseCsvData(csvData);
+            statsResponse.response = this.parseCsvData(csvData);
             statsResponse.success = true;
         } catch (error: any) {
             statsResponse.message = error;
         }
         return statsResponse;
-
     }
 
-    private parseCsvData(csvData: any): any {
+    /**
+     * Fetch all the metrics only for the backend servers.
+     */
+    async getServerStats(): Promise<HaProxyStatsResponse> {
+        let response: HaProxyStatsResponse =  await this.getStats();
+
+        if (response.success && response.response !== null) {
+            // @ts-ignore
+            response.response = response.response.filter((stat) => stat.svname !== 'BACKEND' && stat.svname !== 'FRONTEND')
+            return response;
+        }
+        else {
+            return response;
+        }
+    }
+
+    /**
+     * Private method to filter the svname for later use in specific fetch methods.
+     * @param filter the string to filter for in the svname
+     * @private
+     */
+    private async filterRequest(filter: string): Promise<HaProxyStatsResponse> {
+        let response: HaProxyStatsResponse =  await this.getStats();
+
+        if (response.success && response.response !== null) {
+            // @ts-ignore
+            response.response = response.response.filter((stat) => stat.svname === filter)
+            return response;
+        }
+        else {
+            return response;
+        }
+    }
+
+    /**
+     * Fetch the Stats only for the backends
+     */
+    async getBackendStats(): Promise<HaProxyStatsResponse> {
+        return await this.filterRequest("BACKEND");
+    }
+
+    /**
+     * Fetch the Stats only for the frontends
+     */
+    async getFrontendStats(): Promise<HaProxyStatsResponse> {
+        return await this.filterRequest("FRONTEND");
+    }
+
+
+    private parseCsvData(csvData: any):  any {
         let outputDict: Array<{string: string}> = new Array<any>();
         let rows: string[] = csvData.split('\n');
         let keys: string[] = rows[0].substring(2).split(',')
