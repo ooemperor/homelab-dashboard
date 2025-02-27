@@ -5,7 +5,7 @@
 import {ReactNode} from "react";
 import {Toast} from "../components/Toast";
 
-class ToastService {
+export class ToastService {
 
     toasts: ReactNode[]
 

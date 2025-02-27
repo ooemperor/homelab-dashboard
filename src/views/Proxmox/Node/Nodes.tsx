@@ -44,7 +44,7 @@ export default function Nodes() {
                         </tr>
                         </thead>
                         <tbody>
-                        {isLoading ? <p>Loading...</p> : null}
+                        {isLoading ? null : null}
                         {errorMessage.error ? <p>{errorMessage.message}</p> : null}
                         {!isLoading && nodes.sort((a, b) => a.node > b.node ? 1 : -1).map((node) => (
                             <tr className="clickable-row" key={node.node} onClick={ () => {navigate(`/proxmox/nodes/${node.node}`)}}>

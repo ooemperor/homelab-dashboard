@@ -1,5 +1,6 @@
 /**
  * File to define components for using with ZabbixHosts
+ * @author ooemperor
  */
 import React from "react";
 import {ZabbixHostStatus} from "../../models/zabbix/ZabbixHost";
@@ -7,6 +8,7 @@ import {ZabbixItem} from "../../models/zabbix/ZabbixItem";
 import {axisClasses, barElementClasses, PieChart} from "@mui/x-charts";
 import {colors} from "@mui/material";
 import {ChartsLegendRoot} from "@mui/x-charts/ChartsLegend/LegendPerItem";
+import {StatusBadgeError, StatusBadgeSuccess} from "../StatusBadges";
 
 /**
  * Function to render a Status Badge for a proxmox LXC
@@ -15,9 +17,9 @@ import {ChartsLegendRoot} from "@mui/x-charts/ChartsLegend/LegendPerItem";
  */
 export default function ZabbixHostStatusBadge(status: ZabbixHostStatus) {
     if (status === ZabbixHostStatus.enabled) {
-        return <span className="badge text-bg-success">enabled</span>
+        return StatusBadgeSuccess("enabled");
     } else {
-        return <span className="badge text-bg-danger">disabled</span>
+        return StatusBadgeError("disabled");
     }
 }
 

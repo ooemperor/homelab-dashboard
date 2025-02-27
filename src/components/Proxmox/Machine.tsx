@@ -1,8 +1,9 @@
 /**
  * File to define components for using with LXC
+ * @author ooemperor
  */
-import React from "react";
 import {MachineStatus} from "../../models/proxmox/Machines";
+import {StatusBadgeError, StatusBadgeSuccess} from "../StatusBadges";
 
 
 /**
@@ -12,9 +13,9 @@ import {MachineStatus} from "../../models/proxmox/Machines";
  */
 export default function MachineStatusBadge(status: MachineStatus) {
     if (status === MachineStatus.running) {
-        return <span className="badge text-bg-success">{status}</span>
+        return StatusBadgeSuccess(status);
     } else {
-        return <span className="badge text-bg-danger">{status}</span>
+        return StatusBadgeError(status);
     }
 }
 

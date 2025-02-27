@@ -5,6 +5,7 @@
 import React, {useEffect, useState} from "react";
 import {useStatus} from "../../hooks/Proxmox/useStatus";
 import {Status} from "../../models/proxmox/Status";
+import {haProxyService} from "../../services/HAProxyService";
 
 /**
  * Building function for the Home View
@@ -19,6 +20,7 @@ export default function Home() {
     useEffect(() => {
         const loadStatus = async () => {
             const statusData = await getStatus();
+            await haProxyService.getStats();
             statusData.status = statusData.status?.filter((stat) => stat.id = "cluster")
             setStatus(statusData.status);
         }

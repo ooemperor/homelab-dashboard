@@ -1,5 +1,6 @@
 /**
  * File to define Hardware Stats Row for the use in Proxmox stats
+ * @author ooemperor
  */
 import React from "react";
 import MemoryCard from "./StatsCards/MemoryCard";
