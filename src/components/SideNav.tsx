@@ -61,6 +61,9 @@ export default function SideNav() {
                     <li className="ps-2">
                         <a className={"nav-link d-inline-block"} href={"/haproxy/backend"}>Backends</a>
                     </li>
+                    <li className="ps-2">
+                        <a className={"nav-link d-inline-block"} href={"/haproxy/server"}>Servers</a>
+                    </li>
                 </ul>
             </li>
         </ul>

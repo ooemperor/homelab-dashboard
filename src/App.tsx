@@ -23,6 +23,9 @@ import ZabbixHost_View from "./views/Zabbix/Host/ZabbixHost";
 import ZabbixProxy_View from "./views/Zabbix/Proxy/ZabbixProxy";
 import ZabbixProxyGroup_View from "./views/Zabbix/ProxyGroup/ZabbixProxyGroup";
 import HAProxyHome from "./views/HAProxy/HAProxyHome";
+import HAProxyFrontends from "./views/HAProxy/Frontend/HAProxyFrontends";
+import HAProxyBackends from "./views/HAProxy/Backend/HAProxyBackends";
+import HAProxyServers from "./views/HAProxy/Server/HAProxyServers";
 
 /**
  * Main App run function
@@ -55,10 +58,12 @@ function App() {
                     <Route path="/zabbix/operations/" element={<NotImplemented/>}/>
 
                     <Route path="/haproxy/" element={<HAProxyHome/>}/>
-                    <Route path="/haproxy/frontend/" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/frontend/" element={<HAProxyFrontends/>}/>
                     <Route path="/haproxy/frontend/:id" element={<NotImplemented/>}/>
-                    <Route path="/haproxy/backend/" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/backend/" element={<HAProxyBackends/>}/>
                     <Route path="/haproxy/backend/:id" element={<NotImplemented/>}/>
+                    <Route path="/haproxy/server/" element={<HAProxyServers/>}/>
+                    <Route path="/haproxy/server/:id" element={<NotImplemented/>}/>
 
 
                 </Route>
